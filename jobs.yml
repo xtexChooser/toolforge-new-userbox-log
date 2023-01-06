@@ -1,0 +1,11 @@
+---
+- name: compile
+  image: tf-node16
+  command: yarn && yarn build
+  wait: true
+  emails: onfailure
+- name: update
+  command: yarn start
+  image: tf-node16
+  schedule: "*/15 * * * *"
+  emails: onfailure
