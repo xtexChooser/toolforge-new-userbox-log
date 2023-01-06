@@ -1,4 +1,10 @@
-pwd
+echo Cwd: $(pwd)
+echo Date: $(date)
+
+echo Reset git...
+git add .
+git reset --hard
+git status
 
 echo Load Toolforge jobs
 toolforge-jobs load ./deploy/jobs.yaml
