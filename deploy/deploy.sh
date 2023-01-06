@@ -1,1 +1,1 @@
-toolforge-jobs load jobs.yaml
+toolforge-jobs load ./deploy/jobs.yaml
