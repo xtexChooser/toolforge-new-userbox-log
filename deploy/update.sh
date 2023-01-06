@@ -1,2 +1,2 @@
 git pull --force
-bash deploy.sh
+bash ./deploy/deploy.sh
