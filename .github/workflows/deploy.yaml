@@ -18,4 +18,4 @@ jobs:
           echo "$SSH_KEY" >> ssh_key
           chmod 0600 ssh_key
           ssh -i ssh_key -o StrictHostKeyChecking=no xtex@login.toolforge.org \
-            become new-userbox-log bash -c "cd src; bash ./deploy/update.sh"
+            become new-userbox-log bash -c '"cd src; bash ./deploy/update.sh"'

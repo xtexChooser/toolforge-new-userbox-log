@@ -1,7 +1,10 @@
-pwd
+echo Cwd: $(pwd)
+echo Date: $(date)
 
 echo Reset git...
+git add .
 git reset --hard
+git status
 echo Pull git...
 git pull --force
 
