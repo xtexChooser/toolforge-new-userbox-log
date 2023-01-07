@@ -6,6 +6,7 @@ export type TargetWikiConfig = {
     title_like: string,
     url_base: string,
     telegram_chat?: string,
+    misskey_instance?: string,
 }
 
 export const TARGET_WIKIS: TargetWikiConfig[] = [
@@ -14,7 +15,8 @@ export const TARGET_WIKIS: TargetWikiConfig[] = [
         namespace: 10,
         title_like: 'User\\_%',
         url_base: 'https://zh.wikipedia.org/',
-        telegram_chat: '@zhwpublog'
+        telegram_chat: '@zhwpublog',
+        misskey_instance: 'misskey.cf',
     }
 ]
 
@@ -25,7 +27,8 @@ export type Secrets = {
     },
     telegram: {
         bot_token: string,
-    }
+    },
+    misskey: any,
 }
 
 export const SECRETS = JSON.parse(readFileSync(process.env['HOME'] + '/secrets.json').toString()) as Secrets
