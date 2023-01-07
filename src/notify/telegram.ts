@@ -20,14 +20,18 @@ function format(update: Update): string {
         tags.push('bot')
     return `
 *_New User\\-Box Template_*
-\\{\\{[${update.pageTitle}](${update.viewUrl})\\}\\} by \\[\\[[User:${update.user.actor_name}](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})\\]\\]
-At ${formatTime(update.rc.rc_timestamp)}
+\\{\\{[${formatTG(update.pageTitle)}](${update.viewUrl})\\}\\} by \\[\\[[User:${formatTG(update.user.actor_name)}](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})\\]\\]
+At ${formatTG(formatTime(update.rc.rc_timestamp))}
 *Actor*: id: \`${update.user.actor_id}\` user: \`${update.user.actor_user}\`
 *RC*: id: \`${update.rc.rc_id}\` rev: \`${update.rc.rc_cur_id}\`
-${tags.map(tag => `*__${tag}__*`).join(' ')}
+${tags.map(tag => `*__${formatTG(tag)}__*`).join(' ')}
     `.trim()
 }
 
 function formatTime(time: string): string {
     return `UTC ${time.slice(0, 4)}-${time.slice(4, 6)}-${time.slice(6, 8)} ${time.slice(8, 10)}:${time.slice(10, 12)}:${time.slice(12, 14)}`
+}
+
+function formatTG(str: string): string {
+    return str.replace(/-/g, '\\-')
 }
