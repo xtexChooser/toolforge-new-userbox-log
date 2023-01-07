@@ -18,7 +18,7 @@ function format(update: Update): string {
     return `
 **New User-Box Template**
 
-{{[${update.pageTitle}](${update.viewUrl})}} by ${update.user.actor_user ? `<plain>[[</plain>[User:xx](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})<plain>]]</plain>` : update.user.actor_name}
+{{[${update.pageTitle}](${update.viewUrl})}} by ${update.user.actor_user ? `<plain>[[</plain>[User:${update.user.actor_name}](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})<plain>]]</plain>` : update.user.actor_name}
 At \`${formatUpdateTime(update.rc.rc_timestamp)}\`
 *Actor*: id: \`${update.user.actor_id}\` user: \`${update.user.actor_user ?? "(IP user)"}\`
 *RC*: id: \`${update.rc.rc_id}\` rev: \`${update.rc.rc_cur_id}\`
