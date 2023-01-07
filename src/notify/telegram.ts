@@ -11,6 +11,7 @@ export async function sendTelegramNotification(update: Update) {
         chat_id: update.wiki.telegram_chat,
         parse_mode: 'MarkdownV2',
         text,
+        disable_web_page_preview: true,
     }, { responseType: 'json' })).data
     console.info('TG resp: ', resp['ok'])
 }
