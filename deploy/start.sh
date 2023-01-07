@@ -1,0 +1,1 @@
+toolforge-jobs run --image tf-node16 --command "cd src; yarn start" update-manual
