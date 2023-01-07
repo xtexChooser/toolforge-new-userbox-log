@@ -36,12 +36,12 @@ export async function checkUpdates(wiki: TargetWikiConfig, db: DataSource): Prom
             rc_title: Like(wiki.title_like)
         }
     })).map(async rc => {
-        console.info(`found rc: ${rc.rc_id}`)
+        console.info(`found rc: ${rc.rc_id}`, rc)
         return {
             wiki,
             rc,
             viewUrl: `${wiki.url_base}?curid=${rc.rc_cur_id}`,
-            pageTitle: parsePageTitle(rc.rc_title),
+            pageTitle: parsePageTitle(rc.rc_title.toString()),
             user: await db.manager.findOneByOrFail(Actor, { actor_id: rc.rc_actor })
         } as Update
     }))
