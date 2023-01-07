@@ -9,6 +9,7 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "inlineSourceMap": true,
+      "noImplicitAny": false,
       "rootDir": "src"
    }
 }

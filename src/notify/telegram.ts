@@ -1,5 +1,5 @@
 import { SECRETS } from "../config";
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { Update } from "../update";
 
 export const API_BASE = `https://api.telegram.org/bot${SECRETS.telegram.bot_token}/`
@@ -7,14 +7,27 @@ export const API_BASE = `https://api.telegram.org/bot${SECRETS.telegram.bot_toke
 export async function sendTelegramNotification(update: Update) {
     const text = format(update)
     console.info(text)
-    const resp = (await axios.post(API_BASE + 'sendMessage', {
-        chat_id: update.wiki.telegram_chat,
-        parse_mode: 'MarkdownV2',
-        text,
-        disable_web_page_preview: true,
-    }, { responseType: 'json' })).data
-    console.info('TG resp: ', resp['ok'])
-    return new Promise(resolv => { setTimeout(resolv, 2000) })
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+        try {
+            const resp = (await axios.post(API_BASE + 'sendMessage', {
+                chat_id: update.wiki.telegram_chat,
+                parse_mode: 'MarkdownV2',
+                text,
+                disable_web_page_preview: true,
+            }, { responseType: 'json' })).data
+            console.info('TG resp: ', resp['ok'])
+            break
+        } catch (e) {
+            const err = e as AxiosError
+            if (err.response) {
+                const retryAfter = (err.response.data as any)?.parameters?.retry_after
+                if (retryAfter) {
+                    await new Promise(resolv => setTimeout(resolv, (retryAfter + 2) * 1000))
+                }
+            }
+        }
+    }
 }
 
 function format(update: Update): string {
