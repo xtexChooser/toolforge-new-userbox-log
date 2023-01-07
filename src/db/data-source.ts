@@ -19,7 +19,7 @@ export const ToolsDB = new DataSource({
 export async function getWikiDatabase(target: TargetWikiConfig): Promise<DataSource> {
     const ds = new DataSource({
         type: "mariadb",
-        host: `${target.name}.db.svc.wikimedia.cloud`,
+        host: `${target.name}.analytics.db.svc.wikimedia.cloud`,
         port: 3306,
         username: SECRETS.database.username,
         password: SECRETS.database.password,
