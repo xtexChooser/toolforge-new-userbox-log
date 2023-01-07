@@ -60,6 +60,7 @@ async function getLatestRcID(db: DataSource): Promise<number> {
         select: {
             rc_id: true
         },
+        where: {},
         order: {
             rc_id: 'DESC'
         },

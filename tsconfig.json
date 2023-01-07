@@ -8,7 +8,7 @@
       "outDir": "dist",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true,
+      "inlineSourceMap": true,
       "rootDir": "src"
    }
 }
