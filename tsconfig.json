@@ -10,6 +10,7 @@
       "experimentalDecorators": true,
       "inlineSourceMap": true,
       "noImplicitAny": false,
+      "esModuleInterop": true,
       "rootDir": "src"
    }
 }
