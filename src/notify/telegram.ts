@@ -37,7 +37,7 @@ function format(update: Update): string {
     return `
 *_New User\\-Box Template_*
 \\{\\{[${formatTG(update.pageTitle)}](${update.viewUrl})\\}\\} by ${update.user.actor_user ? `\\[\\[[User:${formatTG(update.user.actor_name)}](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})\\]\\]` : `_${formatTG(update.user.actor_name)}_`}
-At ${formatTG(formatTime(update.rc.rc_timestamp))}
+At \`${formatTG(formatTime(update.rc.rc_timestamp))}\`
 *Actor*: id: \`${update.user.actor_id}\` user: \`${update.user.actor_user ?? "_(IP user)_"}\`
 *RC*: id: \`${update.rc.rc_id}\` rev: \`${update.rc.rc_cur_id}\`
 ${tags.map(tag => `*__${formatTG(tag)}__*`).join(' ')}
