@@ -16,7 +16,7 @@ export const TARGET_WIKIS: TargetWikiConfig[] = [
         title_like: 'User\\_%',
         url_base: 'https://zh.wikipedia.org/',
         telegram_chat: '@zhwpublog',
-        misskey_instance: 'misskey.cf',
+        misskey_instance: 'https://misskey.cf',
     }
 ]
 
