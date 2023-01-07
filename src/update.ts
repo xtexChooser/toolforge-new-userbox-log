@@ -69,5 +69,5 @@ async function getLatestRcID(db: DataSource): Promise<number> {
 }
 
 export function parsePageTitle(title: string): string {
-    return title.replace(/_/g, ' ')
+    return title.toString().replace(/_/g, ' ')
 }
