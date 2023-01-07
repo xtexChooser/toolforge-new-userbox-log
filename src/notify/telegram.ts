@@ -21,9 +21,9 @@ function format(update: Update): string {
         tags.push('bot')
     return `
 *_New User\\-Box Template_*
-\\{\\{[${formatTG(update.pageTitle)}](${update.viewUrl})\\}\\} by \\[\\[[User:${formatTG(update.user.actor_name)}](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})\\]\\]
+\\{\\{[${formatTG(update.pageTitle)}](${update.viewUrl})\\}\\} by ${formatTG(update.user.actor_user ? `\\[\\[[User:${formatTG(update.user.actor_name)}](${update.wiki.url_base}wiki/Special:Redirect/user/${update.user.actor_user})\\]\\]` : `_${update.user.actor_name}_`)}
 At ${formatTG(formatTime(update.rc.rc_timestamp))}
-*Actor*: id: \`${update.user.actor_id}\` user: \`${update.user.actor_user}\`
+*Actor*: id: \`${update.user.actor_id}\` user: \`${update.user.actor_user ?? "_(IP user)_"}\`
 *RC*: id: \`${update.rc.rc_id}\` rev: \`${update.rc.rc_cur_id}\`
 ${tags.map(tag => `*__${formatTG(tag)}__*`).join(' ')}
     `.trim()
