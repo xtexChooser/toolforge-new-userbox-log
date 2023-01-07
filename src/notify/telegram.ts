@@ -23,6 +23,7 @@ export async function sendTelegramNotification(update: Update) {
             if (err.response) {
                 const retryAfter = (err.response.data as any)?.parameters?.retry_after
                 if (retryAfter) {
+                    console.info(`TG rate limit, sleeping for ${retryAfter} secs`)
                     await new Promise(resolv => setTimeout(resolv, (retryAfter + 2) * 1000))
                 }
             }
