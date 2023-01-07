@@ -14,6 +14,7 @@ export async function sendTelegramNotification(update: Update) {
         disable_web_page_preview: true,
     }, { responseType: 'json' })).data
     console.info('TG resp: ', resp['ok'])
+    return new Promise(resolv => { setTimeout(resolv, 2000) })
 }
 
 function format(update: Update): string {
