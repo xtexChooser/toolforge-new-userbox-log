@@ -27,7 +27,7 @@ export async function checkUpdates(wiki: TargetWikiConfig, db: DataSource): Prom
 
     const updates = await Promise.all((await db.manager.find(RecentChanges, {
         order: {
-            rc_id: 'DESC'
+            rc_id: 'ASC'
         },
         where: {
             rc_id: And(LessThanOrEqual(newRcID), MoreThan(wikiState.rc_id)),
