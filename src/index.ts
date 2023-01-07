@@ -13,13 +13,14 @@ import { checkUpdates } from "./update"
     for (const config of TARGET_WIKIS) {
         console.info(`processing ${config.name}`)
         const ds = await getWikiDatabase(config)
+        console.info(`checking updates`)
         const updates = await checkUpdates(config, ds)
         console.info(`found ${updates.length} updates on ${config.name}`)
         await ds.destroy()
 
         for (const update of updates) {
             console.info(`notifying ${update}`)
-            sendNotification(update)
+            await sendNotification(update)
         }
         console.info(`processed ${config.name}`)
     }

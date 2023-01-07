@@ -17,6 +17,7 @@ export const ToolsDB = new DataSource({
 })
 
 export async function getWikiDatabase(target: TargetWikiConfig): Promise<DataSource> {
+    console.info(`connecting to wiki db ${target.name}`)
     const ds = new DataSource({
         type: "mariadb",
         host: `${target.name}.analytics.db.svc.wikimedia.cloud`,
@@ -29,5 +30,6 @@ export async function getWikiDatabase(target: TargetWikiConfig): Promise<DataSou
         entities: [RecentChanges, Actor],
     })
     await ds.initialize()
+    console.info(`connected to wiki db ${target.name}`)
     return ds
 }
