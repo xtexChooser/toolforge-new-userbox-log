@@ -28,4 +28,4 @@ export type Secrets = {
     }
 }
 
-export const SECRETS = JSON.parse(readFileSync('~/secrets.json').toString()) as Secrets
+export const SECRETS = JSON.parse(readFileSync(process.env['HOME'] + '/secrets.json').toString()) as Secrets
