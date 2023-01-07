@@ -35,5 +35,6 @@ function formatTime(time: string): string {
 }
 
 function formatTG(str: string): string {
-    return str.toString().replace(/-/g, '\\-')
+    return str.toString().replace(/-/g, '\\-').replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/\{/g, '\\{').replace(/\}/g, '\\}')
+        .replace(/\*/g, '\\*').replace(/!/g, '\\!').replace(/>/g, '\\>').replace(/#/g, '\\#')
 }
