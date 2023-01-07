@@ -1,20 +1,27 @@
-import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
+import "reflect-metadata"
 
-AppDataSource.initialize().then(async () => {
+import { TARGET_WIKIS } from "./config"
+import { getWikiDatabase, ToolsDB } from "./db/data-source"
+import { sendNotification } from "./notify"
+import { checkUpdates } from "./update"
 
-    console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
+(async function () {
+    console.info('initializing tools db conn')
+    await ToolsDB.initialize()
+    console.info('tools db initialized')
 
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
+    for (const config of TARGET_WIKIS) {
+        console.info(`processing ${config.name}`)
+        const ds = await getWikiDatabase(config)
+        const updates = await checkUpdates(config, ds)
+        console.info(`found ${updates.length} updates on ${config.name}`)
+        await ds.destroy()
 
-    console.log("Here you can setup and run express / fastify / any other framework.")
-
-}).catch(error => console.log(error))
+        for (const update of updates) {
+            console.info(`notifying ${update}`)
+            sendNotification(update)
+        }
+        console.info(`processed ${config.name}`)
+    }
+    console.info('all done')
+})()
