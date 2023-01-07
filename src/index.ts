@@ -19,7 +19,7 @@ import { checkUpdates } from "./update"
         await ds.destroy()
 
         for (const update of updates) {
-            console.info(`notifying ${update}`)
+            console.info('notifying', update)
             await sendNotification(update)
         }
         console.info(`processed ${config.name}`)

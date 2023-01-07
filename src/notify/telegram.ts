@@ -6,11 +6,11 @@ export const API_BASE = `https://api.telegram.org/bot${SECRETS.telegram.bot_toke
 
 export async function sendTelegramNotification(update: Update) {
     const text = format(update)
-    const resp = await axios.post(API_BASE + 'sendMessage', {
+    const resp = (await axios.post(API_BASE + 'sendMessage', {
         chat_id: update.wiki.telegram_chat,
         parse_mode: 'MarkdownV2',
         text,
-    }, { responseType: 'json' })
+    }, { responseType: 'json' })).data
     console.info('TG resp: ', resp)
 }
 
