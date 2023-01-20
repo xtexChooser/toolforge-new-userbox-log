@@ -1,21 +1,14 @@
-import Misskey from 'misskey-js'
+import generator from 'megalodon'
 import { SECRETS } from '../config'
 import { formatUpdateTime, Update } from '../update'
 
 export async function sendMisskeyNotification(update: Update) {
+    const client = generator('misskey', update.wiki.misskey_instance, SECRETS.misskey[update.wiki.name] as string)
     console.info('creating Mk Note')
-
-    const client = new Misskey.api.APIClient({
-        origin: update.wiki.misskey_instance,
-        credential: SECRETS.misskey[update.wiki.name] as string,
-    });
-
-    const resp = await client.request('notes/create', {
-        text: format(update),
-        visibility: 'followers',
-        noExtractEmojis: true,
+    const resp = await client.postStatus(format(update), {
+        visibility: 'unlisted',
     })
-    console.info(`created Mk Note ${resp.createdNote.id}`)
+    console.info(`created Mk Note at ${resp.data.url}`)
 }
 
 function format(update: Update): string {
