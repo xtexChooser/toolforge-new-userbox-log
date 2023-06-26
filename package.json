@@ -26,6 +26,6 @@
     "megalodon": "^5.0.6",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.17"
   }
 }
