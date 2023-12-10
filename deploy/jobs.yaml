@@ -1,11 +1,11 @@
 ---
 - name: compile
-  image: tf-node16
+  image: node18
   command: cd src; yarn && yarn build
   wait: true
   emails: onfailure
 - name: update
   command: cd src; yarn start
-  image: tf-node16
+  image: node18
   schedule: "*/15 * * * *"
   emails: onfailure
