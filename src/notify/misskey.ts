@@ -3,13 +3,14 @@ import { SECRETS } from '../config'
 import { formatUpdateTime, Update } from '../update'
 
 export async function sendMisskeyNotification(update: Update) {
+    return
     const client = generator('misskey', update.wiki.misskey_instance, SECRETS.misskey[update.wiki.name] as string)
     console.info('creating Mk Note')
     try {
         const resp = await client.postStatus(format(update), {
             visibility: 'unlisted',
         })
-        console.info(`created Mk Note at ${resp.data.url}`)
+        console.info(`created Mk Note id=${resp.data.id}`)
     } catch (err) {
         console.error(err)
     }
